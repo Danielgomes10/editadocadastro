@@ -27,6 +27,7 @@ db.create_all()
 @app.route("/index")
 def index():
     return render_template("index.html")
+
 @app.route("/cadastrar")
 def cadastrar():
     return render_template("cadastro.html")
