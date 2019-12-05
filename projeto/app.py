@@ -16,11 +16,11 @@ class Pessoa(db.Model):
     cpf = db.Column(db.String)
     email = db.Column(db.String)
 
-def __init__(self, nome, telefone, cpf, email):
-    self.nome = nome
-    self. telefone = telefone
-    self.cpf = cpf
-    self.email = email
+#def __init__(self, nome, telefone, cpf, email):
+  # self.nome = nome
+  # self.telefone = telefone
+   #self.cpf = cpf
+   #self.email = email
 
 db.create_all()
 
@@ -40,12 +40,17 @@ def cadastro():
         email = request.form.get("email")
         
         if nome and telefone and cpf and email:
-            p = Pessoa(nome, telefone, cpf, email)
+            p = Pessoa()
+            p.nome = nome
+            p.telefone = telefone
+            p.cpf = cpf
+            p.email = email
             db.session.add(p)
             db.session.commit()
+             
     return redirect(url_for("index"))
 
-@app.route("/lista")
+@app.route("/lista") 
 def lista():
     pessoas = Pessoa.query.all()
     return render_template("lista.html", pessoas=pessoas)
